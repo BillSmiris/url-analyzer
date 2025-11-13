@@ -15,74 +15,22 @@
 <body>
     <main>
         <h1>URL Analyzer</h1>
-        <form action="">
+        <form id="form" action="javascript:void(0)">
             <div class="form-group">
                 <label for="url">Enter your URL here:</label>
-                <input type="text" id="url" name="url" />
+                <input type="text" name="url" id="url" />
             </div>
             <div class="input-group reverse">
                 <div class="form-group">
                     <label for="resolveip">Resolve IP Address</label>
-                    <input type="checkbox" id="resolveip" name="resolveip">
+                    <input type="checkbox" name="resolveip" id="resolveip" />
                 </div>
                 <button type="submit" id="submit">Analyze</button>
             </div>
         </form>
 
-        <div>
-            <table>
-                <legend>
-                    Analysis Results
-                </legend>
-                <tr>
-                    <th>IP Address</th>
-                    <td>10.15.23.1</td>
-                </tr>
-                <tr>
-                    <th>href</th>
-                    <td>https://google.com/results?searchTerm="images"&page=1#top</td>
-                </tr>
-                <tr>
-                    <th>Origin</th>
-                    <td>https://google.com</td>
-                </tr>
-                <tr>
-                    <th>protocol</th>
-                    <td>https</td>
-                </tr>
-                <tr>
-                    <th>Username</th>
-                    <td>admin</td>
-                </tr>     
-                <tr>
-                    <th>Password</th>
-                    <td>test</td>
-                </tr>
-                 <tr>
-                    <th>Host</th>
-                    <td>google.com</td>
-                </tr>
-                 <tr>
-                    <th>Hostname</th>
-                    <td>google.com</td>
-                </tr>
-                <tr>
-                    <th>Port</th>
-                    <td>80</td>
-                </tr>
-                <tr>
-                    <th>Pathname</th>
-                    <td>/results</td>
-                </tr>
-                <tr>
-                    <th>Search</th>
-                    <td>admin</td>
-                </tr>
-                <tr>
-                    <th>Hash</th>
-                    <td>top</td>
-                </tr>                              
-            </table>
+        <div id="results">
+
         </div>
     </main>
 
@@ -101,6 +49,6 @@
         <span>© 2025 Copyright: <a href="https://vasilissmyris.com/">Vasilis Smyris</a></span>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
