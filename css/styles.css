@@ -119,6 +119,10 @@ input[type="text"] {
     align-self: flex-start;
 }
 
+form *:disabled {
+    opacity: 70%;
+}
+
 input[type="text"].error {
     border-color: var(--vs-red);
 }

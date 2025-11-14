@@ -3,6 +3,8 @@ const urlInput = document.querySelector('#url');
 const urlErrorSpan = document.querySelector('#url-error');
 const loaderElement = document.querySelector('#loader');
 const form = document.querySelector('#form');
+const submitButton = document.querySelector('#submit');
+const resolveipCheckbox = document.querySelector('#resolveip');
 
 let formHasError = false;
 
@@ -62,10 +64,16 @@ function clearFormError() {
 
 function lockUI() {
     loaderElement.hidden = false;
+    submitButton.disabled = true;
+    resolveipCheckbox.disabled = true;
+    urlInput.disabled = true;
 }
 
 function unlockUI() {
     loaderElement.hidden = true;
+    submitButton.disabled = false;
+    resolveipCheckbox.disabled = false;
+    urlInput.disabled = false;
 }
 
 function isIpAddress(hostname) {
