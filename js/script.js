@@ -1,4 +1,10 @@
 const results = document.querySelector('#results');
+const urlInput = document.querySelector('#url');
+const urlErrorSpan = document.querySelector('#url-error');
+const loaderElement = document.querySelector('#loader');
+const form = document.querySelector('#form');
+
+let formHasError = false;
 
 const urlFields = [
     {
@@ -46,6 +52,22 @@ const urlFields = [
 const ipResolutionFetchError = 'There was an error fetching the IP resolution results! Please try again later.';
 const ipResolutionNoResultsError = 'No resolved IPs found!';
 
+function clearFormError() {
+    if(formHasError) {
+        urlErrorSpan.hidden = true;
+        urlInput.classList.remove('error');
+        formHasError = false;
+    }
+}
+
+function lockUI() {
+    loaderElement.hidden = false;
+}
+
+function unlockUI() {
+    loaderElement.hidden = true;
+}
+
 function isIpAddress(hostname) {
     return /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(hostname);
 }
@@ -83,16 +105,18 @@ async function resolveIpAddress(domain) {
 function buildResultTable(url, resolvedIps, ipResolutionFailed) {
     let html = '';
 
-    html += '<table>' +
+    html += '<div class="table-container">' +
                 '<legend>' +
                     'Analysis Results' +
-                '</legend>'
+                '</legend>' +
+                '<table>';
+
 
     if(resolvedIps) {
         html += '<tr>' +
                     '<th>IP Address</th>' +
                     `<td${ipResolutionFailed ? ' class="color-red"' : ''}>${resolvedIps}</td>` +
-                '</tr>'
+                '</tr>';
 
     }
 
@@ -101,21 +125,24 @@ function buildResultTable(url, resolvedIps, ipResolutionFailed) {
             html += '<tr>' +
                         `<th>${field.label}</th>` +
                         `<td>${url[field.key]}</td>` +
-                    '</tr>'
+                    '</tr>';
         }
     })
 
-    html += '</table>'
+    html += '</div></table>';
 
     results.innerHTML = html;
 }
 
 async function analyzeURL(event)  {
     event.preventDefault();
+    lockUI();
     const url = event.target.url.value;
     const resolveIp = event.target.resolveip.checked;
 
     if (URL.canParse(url)) {
+        results.innerHTML = '';
+
         const parsedURL = new URL(url);
         let resolvedIps = '';
         let ipResolutionFailed = false;
@@ -131,10 +158,13 @@ async function analyzeURL(event)  {
         buildResultTable(parsedURL, resolvedIps, ipResolutionFailed);
     }
     else {
-        alert('Invalid URL!');
+        urlErrorSpan.hidden = false;
+        urlInput.classList.add('error');
+        formHasError = true;
     }
+
+    unlockUI();
 }
 
-const form = document.querySelector('#form');
-
 form.addEventListener('submit', analyzeURL);
+urlInput.addEventListener('input', clearFormError);

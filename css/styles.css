@@ -28,6 +28,10 @@ h1 {
     font-size: 2rem;
 }
 
+.text-small {
+    font-size: .8rem;
+}
+
 button:hover, input[type="checkbox"] {
     cursor: pointer;
 }
@@ -114,6 +118,10 @@ input[type="text"] {
     color: var(--text);
     align-self: flex-start;
 }
+
+input[type="text"].error {
+    border-color: var(--vs-red);
+}
 /*#endregion form*/
 
 /*#region results table*/
@@ -140,7 +148,42 @@ legend {
     text-align: center;
 }
 
+.table-container {
+    animation: grow .3s linear;
+    transform-origin: 0% 0%;
+}
+
+@keyframes grow {
+  0% { transform: scaleY(0%); }
+  100% { transform: scaleY(100%); }
+}
+
 /*#endregion results table*/
+
+/*#region loader*/
+.loader-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    border-style: solid;
+    border-width: .7rem;
+    border-color: var(--vs-blue);
+    border-bottom-color: transparent;
+    animation: spin .5s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+/*#endregion loader*/
 
 /*#region footer*/
 

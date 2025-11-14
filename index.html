@@ -15,10 +15,11 @@
 <body>
     <main>
         <h1>URL Analyzer</h1>
-        <form id="form" action="javascript:void(0)">
+        <form id="form">
             <div class="form-group">
                 <label for="url">Enter your URL here:</label>
                 <input type="text" name="url" id="url" />
+                <span id="url-error" class="color-red text-small" hidden>Invalid URL!</span>
             </div>
             <div class="input-group reverse">
                 <div class="form-group">
@@ -28,7 +29,9 @@
                 <button type="submit" id="submit">Analyze</button>
             </div>
         </form>
-
+        <div class="loader-container">
+            <div id="loader" class="loader" hidden></div>
+        </div>
         <div id="results">
 
         </div>
